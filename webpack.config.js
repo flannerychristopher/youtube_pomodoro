@@ -3,26 +3,28 @@ module.exports = {
   entry: [
     './src/index.js'
   ],
+  
   output: {
     path: __dirname,
     publicPath: '/',
     filename: 'bundle.js'
   },
+
   module: {
-    loaders: [{
-      exclude: /node_modules/,
-      loader: 'babel',
-      query: {
-        presets: ['react', 'es2015', 'stage-1']
-      }
-    }]
+    rules: [
+      { test: /\.js$/, loader: 'babel-loader', exclude: '/node_modules/' },
+      { test: /\.jsx$/, loader: 'babel-loader', exclude: '/node_modules/' }
+    ]
   },
-  resolve: {
-    extensions: ['', '.js', '.jsx']
-  },
+
+  node: {
+    fs: 'empty',
+    net: 'empty',
+    tls: 'empty'
+  }, 
+
   devServer: {
     historyApiFallback: true,
-    inline: true,
     contentBase: './'
   }
 };

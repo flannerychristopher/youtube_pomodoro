@@ -1,20 +1,14 @@
 import React, { Component } from 'react';
 
-export default class SearchBar extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      value: null,
-    }
-  }
-
-  render() {
-    return (
-      <input
-        value={this.state.value}
-        onChange={e => this.setState({ value: e.target.value })}
-      />
-    
-    );
-  }
+const SearchBar = ({ value, onChange, onKeyPress }) => {
+  return (
+    <input
+      autoFocus
+      value={value}
+      onChange={e => onChange(e.target.value)}
+      onKeyPress={event => onKeyPress(event)}
+    />
+  );
 }
+
+export default SearchBar;
