@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import YouTube from 'youtube-search-api-with-axios';
 
-import API_KEY from './API_KEY';
+// import API_KEY from './API_KEY';
 import '../style/App.css';
 
 import SearchBar from './SearchBar';
