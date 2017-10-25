@@ -1,43 +1,19 @@
-import React, { Component } from 'react';
+import React from 'react';
 
-class Timer extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      hours: 0,
-      minutes: 0,
-      seconds: 0
-    }
-  }
+const secondsToArray = input => { // input in total seconds, return array
+  let hours = ('0' + Math.floor(input / 3600)).substr(-2);
+  let minutes = ('0' + Math.floor((input % 3600) / 60)).substr(-2);
+  let seconds = ('0' + Math.ceil((input % 60) % 60)).substr(-2);
+  return [hours, minutes, seconds];
+}
 
-  componentWillMount() {
-    console.log('timer mounted');
-    setInterval(() => this.formatTime(this.props.time), 1000);
-  }
-
-  componentDidMount() {
-    setInterval(() => this.props.countDown(), 1000);
-  }
-
-  padZero(number) {
-    return ('0' + number).substr(-2);
-    // return (`0${number}`).substr(-2);
-  }
-
-  formatTime(input) { // input in total seconds
-    var hours = this.padZero(Math.floor(input / 3600));
-    var minutes = this.padZero(Math.floor((input % 3600) / 60));
-    let seconds = this.padZero(Math.ceil((input % 60) % 60));
-    this.setState({ hours, minutes, seconds });
-  }
-
-  render() {
-    return (
-      <div className="Timer">
-        {this.state.hours}:{this.state.minutes}:{this.state.seconds}
-      </div>
-    );
-  }
+const Timer = ({ currentTime }) => {
+  let displayTime = secondsToArray(currentTime);
+  return (
+    <div className="Timer">
+      {displayTime[0]}:{displayTime[1]}:{displayTime[2]}
+    </div>
+  );
 }
 
 export default Timer;

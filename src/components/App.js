@@ -14,32 +14,48 @@ export default class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      currentTime: null,
+      newTime: { hours: 0, minutes: 0, seconds: 0 },
+      searchTerm: '',
       videoPlaying: null,
-      searchTerm: 'rancid',
-      videos: [],
-      time: 900,
-      timerControl: null
+      videos: []
     }
   }
+
+  componentDidMount() {
+    setInterval(() => this.countDown(), 1000);
+  }
+
+  // TIMER
 
   countDown() {
-    let new_time = this.state.time - 1;
-    if (new_time > -1) {
-      this.setState({ time: new_time });
+    let nextSecond = this.state.currentTime - 1;
+    if (nextSecond > -1) {
+      this.setState({ currentTime: nextSecond });
     } else {
-      // do stuff to end timer
+      this.setState({ videoPlaying: null, videos: [] })
     }
   }
 
-  onTimerControlChange(input) { // input as seconds
-    this.setState({ time: input });
+  onTimerControlChange(key, value) { // key is hours/minutes/seconds
+    this.setState({ newTime: { ...this.state.newTime, [key]: value } })
   }
+
+  objectToSeconds(obj) { //convert state.newTime obj to seconds for state.currentTime
+    return obj['seconds'] + (obj['minutes'] * 60) + (obj['hours'] * 3600);
+  }
+
+  // SEARCH
 
   onSearchChange(searchTerm) {
     this.setState({ searchTerm })
   }
 
-  search() {
+  onKeyPress(event) {
+    if (event.key === 'Enter') this.search();
+  }
+
+  search() { // search for results, set state, start countdown
     let options = {
       maxResults: 3,
       key: API_KEY,
@@ -48,20 +64,21 @@ export default class App extends Component {
       q: this.state.searchTerm
     }
     YouTube(options, videos => {
-      this.setState({ videos, videoPlaying: videos[0] })
+      this.setState({
+        videos,
+        videoPlaying: videos[0],
+        currentTime: this.objectToSeconds(this.state.newTime)
+      })
     });
   }
 
-  onKeyPress(event) {
-    if (event.key === 'Enter') this.search();
-  }
+  // VIDEO
 
   onVideoClick(video) {
     this.setState({ videoPlaying: video });
   }
 
   onVideoEnd() {
-    console.log('video over');
     let nextVideoIndex = this.state.videos.indexOf(this.state.videoPlaying) + 1;
     if (nextVideoIndex > this.state.videos.length - 1) {
       this.setState({ videoPlaying: this.state.videos[0] })
@@ -74,10 +91,14 @@ export default class App extends Component {
     return (
       <div className="App">
         <Timer
-          time={this.state.time}
+          currentTime={this.state.currentTime}
           countDown={this.countDown.bind(this)}
         />
-        <TimerControl onChange={this.onTimerControlChange.bind(this)} />
+
+        <TimerControl
+          newTime={this.state.newTime}
+          onChange={this.onTimerControlChange.bind(this)}
+        />
 
         <SearchBar
           value={this.state.searchTerm}

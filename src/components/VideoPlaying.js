@@ -6,7 +6,6 @@ const VideoPlaying = ({ video, onVideoEnd }) => {
   if (!video) {
     return <div></div>;
   }
-  const url = `https://www.youtube.com/embed/${video.id.videoId}?autoplay=1`;
   return (
     <div className="VideoPlaying">
       <Player
@@ -17,6 +16,7 @@ const VideoPlaying = ({ video, onVideoEnd }) => {
       />
       <div>
         <div>{video.snippet.title}</div>
+        <span>{video.snippet.channelTitle}</span>
         <div>{video.snippet.description}</div>
       </div>
     </div>

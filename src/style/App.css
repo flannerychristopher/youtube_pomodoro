@@ -1,4 +1,12 @@
+/* green         #00ea79
+light yellow  #f8ffe5
+sea           #1b9aaa
+pinkred       #ef476f
+sun           #ffc43d */
+
 body {
+  background-color: #f8ffe5;
+  color: #1b9aaa;
   font-family: Verdana, Geneva, Tahoma, sans-serif;
   box-sizing: border-box;
 }
@@ -6,29 +14,66 @@ body {
 .App {
   max-width: 460px;
   margin: 0 auto;
-  border: 10px dashed orange;
+  border: 10px dashed #ef476f;
   border-radius: 5px;
   margin-top: 1em;
   padding: 1em;
 }
 
+/* SEARCH */
+
 .SearchBar {
   box-sizing: border-box;
   width: 100%;
+  height: 25px;
+  border-radius: 5px;
   margin: 0 0;
   padding: 0 0;
+  font-weight: 600;
+  letter-spacing: .2em;
+  color: #ef476f;
+  background-color: #00ea79;
 }
 
 button {
   display: block;
   margin: 0 0 10px 0;
   width: 100%;
+  height: 25px;
+  background-color: #ffc43d;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
 }
 
-li {
-  list-style: none;
-  margin: 0 0;
-  padding: 0 0;
+/* TIMER */
+
+.Timer {
+  height: 50px;
+  font-size: 30px;
+  padding: 5px;
+  text-align: center;
+  color: #00ea79;
+}
+
+.TimerControl {
+  display: flex;
+}
+
+.TimerControl div {
+  background-color: #ffc43d;
+  height: 25px;
+  cursor: pointer;
+  width: 100%;
+  
+}
+
+.TimerControl div select {
+  background: transparent;
+  border: none;
+  width: 100%;
+  height: 25px;
+  padding: 5px;
 }
 
 /* VIDEOS */
@@ -38,12 +83,14 @@ li {
   min-height: 220px;
   padding: 15px;
   margin-bottom: 15px;
-  border-bottom: 10px dashed orange;
+  border-bottom: 10px dashed #ef476f;
 }
 
 .Player {
   max-width: 320px;
   max-height: 195px;
+  border: 5px solid #00ea79;
+  border-radius: 5px;
 }
 
 .VideoList {
@@ -55,6 +102,7 @@ li {
   justify-content: space-between;
   margin-bottom: 10px;
   opacity: .7;
+
 }
 
 .VideoItem:hover {
@@ -78,5 +126,6 @@ li {
 }
 
 .VideoTitle {
+  color: #ffc43d;
   font-weight: bold;
 }

@@ -2,13 +2,16 @@ import React from 'react';
 import VideoItem from './VideoItem';
 
 const VideoList = ({ videos, onClick }) => {
+  if (!videos) {
+    return <div></div>;
+  }
 
   const videoItems = videos.map(video => {
     return (
       <VideoItem
-        onClick={onClick}
-        key={video.id.videoId}
         video={video}
+        key={video.id.videoId}
+        onClick={onClick}
       />
     );
   });
