@@ -6,6 +6,7 @@ import API_KEY from './API_KEY';
 
 import SearchBar from './SearchBar';
 import Timer from './Timer';
+import TimerControl from './TimerControl';
 import VideoList from './VideoList';
 import VideoPlaying from './VideoPlaying';
 
@@ -16,17 +17,22 @@ export default class App extends Component {
       videoPlaying: null,
       searchTerm: 'rancid',
       videos: [],
-      time: 15034
+      time: 900,
+      timerControl: null
     }
   }
 
   countDown() {
     let new_time = this.state.time - 1;
-    if (new_time > 0) {
+    if (new_time > -1) {
       this.setState({ time: new_time });
     } else {
       // do stuff to end timer
     }
+  }
+
+  onTimerControlChange(input) { // input as seconds
+    this.setState({ time: input });
   }
 
   onSearchChange(searchTerm) {
@@ -57,10 +63,10 @@ export default class App extends Component {
   onVideoEnd() {
     console.log('video over');
     let nextVideoIndex = this.state.videos.indexOf(this.state.videoPlaying) + 1;
-    if (nextVideoIndex) {
-      this.setState({ videoPlaying: this.state.videos[nextVideoIndex] });
+    if (nextVideoIndex > this.state.videos.length - 1) {
+      this.setState({ videoPlaying: this.state.videos[0] })
     } else {
-      this.setState({ videoPlaying: this.state.video[0] })
+      this.setState({ videoPlaying: this.state.videos[nextVideoIndex] });
     }
   }
 
@@ -71,6 +77,7 @@ export default class App extends Component {
           time={this.state.time}
           countDown={this.countDown.bind(this)}
         />
+        <TimerControl onChange={this.onTimerControlChange.bind(this)} />
 
         <SearchBar
           value={this.state.searchTerm}
