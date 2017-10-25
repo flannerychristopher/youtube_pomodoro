@@ -2,14 +2,18 @@ import React, { Component } from 'react';
 import YouTube from 'youtube-search-api-with-axios';
 
 import API_KEY from './API_KEY';
+import '../style/App.css';
+
 import SearchBar from './SearchBar';
 import VideoList from './VideoList';
+import VideoPlaying from './VideoPlaying';
 
 export default class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      searchTerm: null,
+      videoPlaying: null,
+      searchTerm: 'Pauly Shore',
       videos: []
     }
   }
@@ -20,12 +24,14 @@ export default class App extends Component {
 
   search() {
     let options = {
-      maxResults: 30,
+      maxResults: 3,
       key: API_KEY,
+      topicId: '/m/04rlf',
+      type: 'video',
       q: this.state.searchTerm
     }
     YouTube(options, videos => {
-      this.setState({ videos })
+      this.setState({ videos, videoPlaying: videos[0] })
     });
   }
 
@@ -33,9 +39,13 @@ export default class App extends Component {
     if (event.key === 'Enter') this.search();
   }
 
+  onVideoClick(video) {
+    this.setState({ videoPlaying: video });
+  }
+
   render() {
     return (
-      <div>
+      <div className="App">
         <SearchBar
           value={this.state.searchTerm}
           onChange={this.onSearchChange.bind(this)}
@@ -43,7 +53,12 @@ export default class App extends Component {
         />
         <button onClick={e => this.search()}>search</button>
 
-        <VideoList videos={this.state.videos} />
+        <VideoPlaying video={this.state.videoPlaying} />
+
+        <VideoList
+          onClick={this.onVideoClick.bind(this)}
+          videos={this.state.videos}
+        />
       </div>
     );
   }
