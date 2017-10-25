@@ -1,1 +1,1 @@
-search YouTube API
+search YouTube API and return a playlist that plays while a pomodoro timer runs

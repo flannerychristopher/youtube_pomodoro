@@ -1,7 +1,7 @@
 {
-  "name": "youtube_search",
+  "name": "youtube_pomodoro",
   "version": "1.0.0",
-  "description": "search youtube through API",
+  "description": "search youtube through API and play during a pomodoro timer",
   "main": "index.js",
   "scripts": {
     "start": "node ./node_modules/webpack-dev-server/bin/webpack-dev-server.js"

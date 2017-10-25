@@ -48,6 +48,8 @@ export default class App extends Component {
     let nextVideoIndex = this.state.videos.indexOf(this.state.videoPlaying) + 1;
     if (nextVideoIndex) {
       this.setState({ videoPlaying: this.state.videos[nextVideoIndex] });
+    } else {
+      this.setState({ videoPlaying: this.state.video[0] })
     }
   }
 
