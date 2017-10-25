@@ -45,6 +45,10 @@ export default class App extends Component {
 
   onVideoEnd() {
     console.log('video over');
+    let nextVideoIndex = this.state.videos.indexOf(this.state.videoPlaying) + 1;
+    if (nextVideoIndex) {
+      this.setState({ videoPlaying: this.state.videos[nextVideoIndex] });
+    }
   }
 
   render() {
