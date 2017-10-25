@@ -3,7 +3,6 @@ import YouTube from 'youtube-search-api-with-axios';
 
 import '../style/App.css';
 // import API_KEY from './API_KEY';
-// const API_KEY = process.env.API_KEY;
 
 import SearchBar from './SearchBar';
 import VideoList from './VideoList';

@@ -1,5 +1,6 @@
 var webpack = require("webpack");
 var path = require("path");
+const Dotenv = require('dotenv-webpack');
 
 module.exports = {
   entry: [
@@ -26,6 +27,11 @@ module.exports = {
     historyApiFallback: true,
     contentBase: './'
   },
+  plugins: [
+    new webpack.DefinePlugin({             
+      API_HOST: JSON.stringify(process.env.API_KEY)
+    })
+  ],
   resolve: {
     extensions: ['.js', '.jsx']
   }
