@@ -23,6 +23,7 @@
   "dependencies": {
     "react": "^0.14.3",
     "react-dom": "^0.14.3",
+    "react-youtube": "^7.5.0",
     "youtube-search-api-with-axios": "^2.0.0"
   }
 }

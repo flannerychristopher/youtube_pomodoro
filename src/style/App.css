@@ -41,6 +41,11 @@ li {
   border-bottom: 10px dashed orange;
 }
 
+.Player {
+  max-width: 320px;
+  max-height: 195px;
+}
+
 .VideoList {
   font-size: .7em;
 }

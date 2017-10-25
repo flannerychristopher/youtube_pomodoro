@@ -13,7 +13,7 @@ export default class App extends Component {
     super(props);
     this.state = {
       videoPlaying: null,
-      searchTerm: 'Pauly Shore',
+      searchTerm: 'rancid',
       videos: []
     }
   }
@@ -43,6 +43,10 @@ export default class App extends Component {
     this.setState({ videoPlaying: video });
   }
 
+  onVideoEnd() {
+    console.log('video over');
+  }
+
   render() {
     return (
       <div className="App">
@@ -53,7 +57,10 @@ export default class App extends Component {
         />
         <button onClick={e => this.search()}>search</button>
 
-        <VideoPlaying video={this.state.videoPlaying} />
+        <VideoPlaying
+          video={this.state.videoPlaying}
+          onVideoEnd={this.onVideoEnd.bind(this)}
+        />
 
         <VideoList
           onClick={this.onVideoClick.bind(this)}
