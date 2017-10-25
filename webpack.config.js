@@ -1,6 +1,5 @@
 var webpack = require("webpack");
 var path = require("path");
-const Dotenv = require('dotenv-webpack');
 
 module.exports = {
   entry: [
