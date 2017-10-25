@@ -2,9 +2,10 @@ import React, { Component } from 'react';
 import YouTube from 'youtube-search-api-with-axios';
 
 import '../style/App.css';
-// import API_KEY from './API_KEY';
+import API_KEY from './API_KEY';
 
 import SearchBar from './SearchBar';
+import Timer from './Timer';
 import VideoList from './VideoList';
 import VideoPlaying from './VideoPlaying';
 
@@ -14,7 +15,17 @@ export default class App extends Component {
     this.state = {
       videoPlaying: null,
       searchTerm: 'rancid',
-      videos: []
+      videos: [],
+      time: 15034
+    }
+  }
+
+  countDown() {
+    let new_time = this.state.time - 1;
+    if (new_time > 0) {
+      this.setState({ time: new_time });
+    } else {
+      // do stuff to end timer
     }
   }
 
@@ -25,7 +36,7 @@ export default class App extends Component {
   search() {
     let options = {
       maxResults: 3,
-      key: process.env.API_KEY,
+      key: API_KEY,
       topicId: '/m/04rlf',
       type: 'video',
       q: this.state.searchTerm
@@ -56,6 +67,11 @@ export default class App extends Component {
   render() {
     return (
       <div className="App">
+        <Timer
+          time={this.state.time}
+          countDown={this.countDown.bind(this)}
+        />
+
         <SearchBar
           value={this.state.searchTerm}
           onChange={this.onSearchChange.bind(this)}

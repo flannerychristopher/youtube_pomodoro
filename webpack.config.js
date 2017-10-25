@@ -26,11 +26,6 @@ module.exports = {
     historyApiFallback: true,
     contentBase: './'
   },
-  plugins: [
-    new webpack.DefinePlugin({             
-      API_HOST: JSON.stringify(process.env.API_KEY)
-    })
-  ],
   resolve: {
     extensions: ['.js', '.jsx']
   }
