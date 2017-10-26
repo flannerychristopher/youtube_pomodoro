@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import YouTube from 'youtube-search-api-with-axios';
 
 import '../style/App.css';
-import API_KEY from './API_KEY';
 
 import SearchBar from './SearchBar';
 import Timer from './Timer';
@@ -15,7 +14,7 @@ export default class App extends Component {
     super(props);
     this.state = {
       currentTime: null,
-      newTime: { hours: 0, minutes: 0, seconds: 0 },
+      newTime: { hours: 0, minutes: 15, seconds: 0 },
       searchTerm: '',
       videoPlaying: null,
       videos: []
@@ -57,8 +56,8 @@ export default class App extends Component {
 
   search() { // search for results, set state, start countdown
     let options = {
-      maxResults: 3,
-      key: API_KEY,
+      maxResults: 12,
+      key: 'AIzaSyBJAQLs7QuofgloWGUH0PYCwoxVX-fHdmM',
       topicId: '/m/04rlf',
       type: 'video',
       q: this.state.searchTerm
