@@ -81,13 +81,11 @@ button {
   min-height: 220px;
   padding: 15px;
   margin-bottom: 15px;
-  border-bottom: 10px dashed #e52d27;
 }
 
 .Player {
   max-width: 320px;
   max-height: 195px;
-  border: 5px solid #559900;
   border-radius: 5px;
 }
 
@@ -123,6 +121,5 @@ button {
 }
 
 .VideoTitle {
-  color: #ffc43d;
   font-weight: bold;
 }
